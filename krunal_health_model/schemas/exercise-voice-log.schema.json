@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/exercise-voice-log.schema.json",
+  "title": "Exercise Voice Log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["timestamp", "raw_text", "activities", "confidence"],
+  "properties": {
+    "timestamp": { "type": "string", "format": "date-time" },
+    "raw_text": { "type": "string" },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["activity"],
+        "properties": {
+          "activity": {
+            "type": "string",
+            "enum": ["rowing", "strength_training", "walking", "running", "cycling", "mobility", "yoga", "other"]
+          },
+          "duration_minutes": { "type": ["number", "null"], "minimum": 0 },
+          "distance_miles": { "type": ["number", "null"], "minimum": 0 },
+          "focus": { "type": ["string", "null"] },
+          "sets": { "type": ["integer", "null"], "minimum": 0 },
+          "reps": { "type": ["integer", "null"], "minimum": 0 },
+          "weight": { "type": ["string", "null"] },
+          "intensity": {
+            "type": ["string", "null"],
+            "enum": ["easy", "moderate", "hard", "max", "unknown", null]
+          },
+          "perceived_effort_1_to_10": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+          "notes": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "needs_clarification": { "type": "boolean", "default": false },
+    "clarifying_question": { "type": ["string", "null"] }
+  }
+}
+

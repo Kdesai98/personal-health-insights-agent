@@ -1,0 +1,24 @@
+{
+  "date": "2026-04-19",
+  "sleep": {
+    "duration_minutes": 444,
+    "efficiency_percent": 91,
+    "sleep_score": 84,
+    "bedtime_start": "2026-04-18T22:42:00-04:00",
+    "bedtime_end": "2026-04-19T06:18:00-04:00"
+  },
+  "readiness": {
+    "readiness_score": 82,
+    "hrv_rmssd_ms": 62,
+    "hrv_delta_from_baseline_percent": 3,
+    "resting_heart_rate_bpm": 54,
+    "resting_heart_rate_delta_from_baseline_bpm": 1
+  },
+  "activity": {
+    "steps": 8200,
+    "calories_burned": 2550,
+    "active_calories": 720,
+    "activity_score": 81
+  }
+}
+
