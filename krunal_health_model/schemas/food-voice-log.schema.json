@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/food-voice-log.schema.json",
+  "title": "Food Voice Log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["timestamp", "raw_text", "parsed_foods", "confidence"],
+  "properties": {
+    "timestamp": { "type": "string", "format": "date-time" },
+    "meal_label": {
+      "type": ["string", "null"],
+      "enum": ["breakfast", "lunch", "dinner", "snack", "pre_workout", "post_workout", "unknown", null]
+    },
+    "raw_text": { "type": "string" },
+    "parsed_foods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "quantity_text": { "type": ["string", "null"] },
+          "vegan_vegetarian_compatible": { "type": ["boolean", "null"] },
+          "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "estimated_nutrition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "calories": { "type": ["number", "null"], "minimum": 0 },
+        "protein_g": { "type": ["number", "null"], "minimum": 0 },
+        "carbs_g": { "type": ["number", "null"], "minimum": 0 },
+        "fat_g": { "type": ["number", "null"], "minimum": 0 },
+        "fiber_g": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "needs_clarification": { "type": "boolean", "default": false },
+    "clarifying_question": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] }
+  }
+}
+

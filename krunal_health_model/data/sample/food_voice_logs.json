@@ -1,0 +1,81 @@
+[
+  {
+    "timestamp": "2026-04-19T09:15:00-04:00",
+    "meal_label": "breakfast",
+    "raw_text": "Had tofu scramble, two slices of toast, avocado, berries, and water.",
+    "parsed_foods": [
+      {
+        "name": "tofu scramble",
+        "quantity_text": "one bowl",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.78
+      },
+      {
+        "name": "toast",
+        "quantity_text": "two slices",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.9
+      },
+      {
+        "name": "avocado",
+        "quantity_text": "one half",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.86
+      },
+      {
+        "name": "berries",
+        "quantity_text": "one serving",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.82
+      }
+    ],
+    "estimated_nutrition": {
+      "calories": 650,
+      "protein_g": 34,
+      "carbs_g": 62,
+      "fat_g": 30,
+      "fiber_g": 16
+    },
+    "confidence": 0.74,
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "notes": null
+  },
+  {
+    "timestamp": "2026-04-19T13:10:00-04:00",
+    "meal_label": "lunch",
+    "raw_text": "Lunch was a lentil rice bowl with vegetables and tahini sauce.",
+    "parsed_foods": [
+      {
+        "name": "lentil rice bowl",
+        "quantity_text": "one bowl",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.78
+      },
+      {
+        "name": "vegetables",
+        "quantity_text": "mixed",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.8
+      },
+      {
+        "name": "tahini sauce",
+        "quantity_text": "unknown",
+        "vegan_vegetarian_compatible": true,
+        "confidence": 0.7
+      }
+    ],
+    "estimated_nutrition": {
+      "calories": 720,
+      "protein_g": 32,
+      "carbs_g": 100,
+      "fat_g": 20,
+      "fiber_g": 22
+    },
+    "confidence": 0.68,
+    "needs_clarification": true,
+    "clarifying_question": "Was this a small, medium, or large bowl?",
+    "notes": null
+  }
+]
+

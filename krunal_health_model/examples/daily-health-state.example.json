@@ -1,0 +1,106 @@
+{
+  "date": "2026-04-19",
+  "sources": {
+    "wearable_primary": "oura",
+    "manual_food": "wispr_flow",
+    "manual_exercise": "wispr_flow"
+  },
+  "wearable": {
+    "sleep": {
+      "duration_minutes": 444,
+      "efficiency_percent": 91,
+      "sleep_score": 84,
+      "bedtime_start": "2026-04-18T22:42:00-04:00",
+      "bedtime_end": "2026-04-19T06:18:00-04:00"
+    },
+    "readiness": {
+      "readiness_score": 82,
+      "hrv_rmssd_ms": 62,
+      "hrv_delta_from_baseline_percent": 3,
+      "resting_heart_rate_bpm": 54,
+      "resting_heart_rate_delta_from_baseline_bpm": 1
+    },
+    "activity": {
+      "steps": 8200,
+      "calories_burned": 2550,
+      "active_calories": 720,
+      "activity_score": 81
+    }
+  },
+  "manual_logs": {
+    "food": [],
+    "exercise": []
+  },
+  "nutrition_summary": {
+    "estimated_calories": null,
+    "protein_g": null,
+    "carbs_g": null,
+    "fat_g": null,
+    "fiber_g": null,
+    "confidence": null
+  },
+  "baseline_behaviors": {
+    "diet_pattern": "vegan-vegetarian",
+    "caffeine": "none",
+    "meditation_morning": true,
+    "meditation_night": true,
+    "supplements_taken": [
+      "vegan multivitamin",
+      "saffron",
+      "ashwagandha"
+    ]
+  },
+  "subjective": {
+    "energy_1_to_10": 8,
+    "mood_1_to_10": 8,
+    "focus_1_to_10": 8,
+    "stress_1_to_10": 3,
+    "digestion_1_to_10": 7,
+    "soreness_1_to_10": 4,
+    "notes": "Felt sharp in the morning. Digestion was good overall."
+  },
+  "environment": {
+    "traveling": false,
+    "location_context": "normal home environment",
+    "air_quality_context": "high_air_quality"
+  },
+  "labs": {},
+  "inferences": [
+    {
+      "name": "day_type",
+      "value": "training-biased",
+      "confidence": 0.72,
+      "source": "rule_v0_sleep_readiness_subjective_training_load"
+    }
+  ],
+  "recommendation_context": {
+    "primary_goals": [
+      "gain muscle",
+      "reduce body fat",
+      "improve sleep",
+      "improve mood",
+      "improve digestion",
+      "improve focus",
+      "maintain strong energy",
+      "improve athletic performance",
+      "support healthy testosterone",
+      "increase peace and stability of mind"
+    ],
+    "hard_constraints": [
+      "no diagnosis",
+      "no medication changes",
+      "no unverified supplement recommendations",
+      "no extreme cutting",
+      "vegan-vegetarian compatible"
+    ],
+    "allowed_recommendation_types": [
+      "workouts",
+      "meals",
+      "bedtime",
+      "recovery days",
+      "lab tests to discuss with clinician",
+      "low-risk experiments"
+    ]
+  }
+}
+

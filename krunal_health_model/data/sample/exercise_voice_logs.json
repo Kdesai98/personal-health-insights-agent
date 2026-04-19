@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2026-04-19T18:30:00-04:00",
+    "raw_text": "Rowed two miles at moderate intensity and lifted chest and triceps for 50 minutes.",
+    "activities": [
+      {
+        "activity": "rowing",
+        "duration_minutes": null,
+        "distance_miles": 2,
+        "focus": null,
+        "sets": null,
+        "reps": null,
+        "weight": null,
+        "intensity": "moderate",
+        "perceived_effort_1_to_10": 6,
+        "notes": null
+      },
+      {
+        "activity": "strength_training",
+        "duration_minutes": 50,
+        "distance_miles": null,
+        "focus": "chest and triceps",
+        "sets": null,
+        "reps": null,
+        "weight": null,
+        "intensity": "moderate",
+        "perceived_effort_1_to_10": 7,
+        "notes": null
+      }
+    ],
+    "confidence": 0.82,
+    "needs_clarification": false,
+    "clarifying_question": null
+  }
+]
+

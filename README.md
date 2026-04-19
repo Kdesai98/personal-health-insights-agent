@@ -1,5 +1,17 @@
 # Transforming Wearable Data into Personal Health Insights using Large Language Model Agents (PHIA)
 
+## Krunal Health Model Layer
+
+This fork now includes a Krunal-specific personal health model scaffold in [`krunal_health_model`](krunal_health_model/README.md).
+
+That folder defines the first data contract for Oura data, voice-logged food, voice-logged exercise, subjective check-ins, safety boundaries, and an initial rule-guided daily recommendation engine.
+
+Run the local prototype from the repo root:
+
+```bash
+PYTHONPATH=krunal_health_model/src python -m krunal_health_engine.daily_health_engine --input-dir krunal_health_model/data/sample
+```
+
 <p align="center">
 :fire: Please remember to :star: this repo if you find it useful and <a href="https://github.com/yahskapar/PHIA#scroll-citation">cite</a> our work if you end up using it in your work! :fire:
 </p>

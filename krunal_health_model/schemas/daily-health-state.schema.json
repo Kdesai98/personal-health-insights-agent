@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/daily-health-state.schema.json",
+  "title": "Daily Health State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["date", "sources", "wearable", "manual_logs", "subjective", "recommendation_context"],
+  "properties": {
+    "date": { "type": "string", "format": "date" },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wearable_primary", "manual_food", "manual_exercise"],
+      "properties": {
+        "wearable_primary": { "type": "string", "enum": ["oura"] },
+        "manual_food": { "type": "string", "enum": ["wispr_flow", "manual_text", "unknown"] },
+        "manual_exercise": { "type": "string", "enum": ["wispr_flow", "manual_text", "unknown"] }
+      }
+    },
+    "wearable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sleep": { "type": "object", "additionalProperties": true },
+        "readiness": { "type": "object", "additionalProperties": true },
+        "activity": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "manual_logs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["food", "exercise"],
+      "properties": {
+        "food": { "type": "array", "items": { "$ref": "food-voice-log.schema.json" } },
+        "exercise": { "type": "array", "items": { "$ref": "exercise-voice-log.schema.json" } }
+      }
+    },
+    "nutrition_summary": { "type": "object", "additionalProperties": true },
+    "baseline_behaviors": { "type": "object", "additionalProperties": true },
+    "subjective": { "type": "object", "additionalProperties": true },
+    "environment": { "type": "object", "additionalProperties": true },
+    "labs": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Latest lab values. Do not use for diagnosis."
+    },
+    "inferences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value", "confidence", "source"],
+        "properties": {
+          "name": { "type": "string" },
+          "value": {},
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "recommendation_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_goals", "hard_constraints"],
+      "properties": {
+        "primary_goals": { "type": "array", "items": { "type": "string" } },
+        "hard_constraints": { "type": "array", "items": { "type": "string" } },
+        "allowed_recommendation_types": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
+
