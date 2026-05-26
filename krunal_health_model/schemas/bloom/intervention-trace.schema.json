@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/intervention-trace.schema.json",
+  "title": "Bloom Intervention Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["trace_id", "user_id_hash", "purpose_of_use", "zone_lineage", "state_encoder_version", "candidate_posteriors", "voi_scores", "safety_decisions", "selected_action_id", "evidence_refs", "generated_explanation", "verifier_outcome", "created_at"],
+  "properties": {
+    "trace_id": { "type": "string" },
+    "user_id_hash": { "type": "string" },
+    "purpose_of_use": { "type": "string" },
+    "zone_lineage": { "type": "object", "additionalProperties": { "type": "string" } },
+    "state_encoder_version": { "type": "string" },
+    "candidate_posteriors": { "type": "object", "additionalProperties": true },
+    "voi_scores": { "type": "object", "additionalProperties": true },
+    "safety_decisions": { "type": "object", "additionalProperties": true },
+    "selected_action_id": { "type": ["string", "null"] },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "generated_explanation": { "type": "string" },
+    "verifier_outcome": { "type": "object", "additionalProperties": true },
+    "created_at": { "type": "string" }
+  }
+}
+

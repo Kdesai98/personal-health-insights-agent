@@ -1,0 +1,703 @@
+{
+  "plan": {
+    "date": "2026-04-19",
+    "day_type": "training-biased",
+    "headline": "Ask before acting.",
+    "summary": "Ask before acting. Readiness is 0.77 with CI [0.58, 0.95], fatigue is 0.24, and sleep debt is 0.07. Chosen path: Clarify protein portion.",
+    "workout": "Keep training moderate unless new information raises or lowers confidence.",
+    "nutrition": "Current logged protein is about 66g. Bias the next meal toward dense vegan-vegetarian protein.",
+    "sleep": "Protect bedtime tonight. The system treats sleep regularity as a first-class lever, not an afterthought.",
+    "focus": "Use your strongest-focus window for demanding work and keep interruptions sparse unless the expected value is high.",
+    "question": "Was your highest-protein meal today smaller, typical, or larger than usual?",
+    "uncertainty": [
+      "Nutrition estimates are still rough enough that one clarification could change the recommendation.",
+      "Fatigue uncertainty is still wide because modality coverage is incomplete."
+    ],
+    "provenance": [
+      "Readiness mean 0.77",
+      "Fatigue mean 0.24",
+      "OOD score 0.12",
+      "Estimated protein 66g"
+    ],
+    "safety_notes": [
+      "No diagnosis, medication changes, or unverified supplements.",
+      "Escalate to a clinician for high-risk symptoms or anything outside routine wellness coaching."
+    ],
+    "trace": {
+      "trace_id": "trace_97630a76fc19",
+      "user_id_hash": "krunal_demo_user",
+      "purpose_of_use": "consumer_coaching",
+      "zone_lineage": {
+        "zone1": "zone1_ingestion_021403d91147",
+        "zone2": "zone2_canonical_6f1064706332",
+        "zone3": "zone3_feature_experiment_04685671224a"
+      },
+      "state_encoder_version": "reference_v0_bloom_scaffold",
+      "candidate_posteriors": {
+        "strength_progression": {
+          "study_id": "study_eed62bc96724",
+          "population_effect": {
+            "mean": 0.302,
+            "ci_low": 0.122,
+            "ci_high": 0.481,
+            "probability_above_threshold": 1.0,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.18,
+            "notes": [
+              "Population effect is shrunk relative to personal effect."
+            ]
+          },
+          "personal_effect": {
+            "mean": 0.368,
+            "ci_low": 0.218,
+            "ci_high": 0.518,
+            "probability_above_threshold": 1.0,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.18,
+            "notes": [
+              "Strength progression benefits when readiness dominates fatigue."
+            ]
+          },
+          "rationale": [
+            "Strength progression benefits when readiness dominates fatigue.",
+            "Study: training_load_adjustment",
+            "Design: randomized_feature_flag_with_long_term_holdout"
+          ]
+        },
+        "recovery_row": {
+          "study_id": "study_eed62bc96724",
+          "population_effect": {
+            "mean": 0.165,
+            "ci_low": -0.015,
+            "ci_high": 0.345,
+            "probability_above_threshold": 0.737,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.18,
+            "notes": [
+              "Population effect is shrunk relative to personal effect."
+            ]
+          },
+          "personal_effect": {
+            "mean": 0.201,
+            "ci_low": 0.052,
+            "ci_high": 0.351,
+            "probability_above_threshold": 0.905,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.18,
+            "notes": [
+              "Recovery-biased movement helps more when fatigue and sleep debt are elevated."
+            ]
+          },
+          "rationale": [
+            "Recovery-biased movement helps more when fatigue and sleep debt are elevated.",
+            "Study: training_load_adjustment",
+            "Design: randomized_feature_flag_with_long_term_holdout"
+          ]
+        },
+        "bedtime_protection": {
+          "study_id": "study_27e10a3c96d4",
+          "population_effect": {
+            "mean": 0.144,
+            "ci_low": -0.035,
+            "ci_high": 0.324,
+            "probability_above_threshold": 0.679,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.28,
+            "notes": [
+              "Population effect is shrunk relative to personal effect."
+            ]
+          },
+          "personal_effect": {
+            "mean": 0.176,
+            "ci_low": 0.026,
+            "ci_high": 0.326,
+            "probability_above_threshold": 0.821,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.28,
+            "notes": [
+              "Sleep-protection nudges matter most when sleep debt and stress are non-trivial."
+            ]
+          },
+          "rationale": [
+            "Sleep-protection nudges matter most when sleep debt and stress are non-trivial.",
+            "Study: bedtime_protection_nudge",
+            "Design: interrupted_time_series_with_per_user_baselines"
+          ]
+        },
+        "protein_portion_check": {
+          "study_id": "study_18bcc8909439",
+          "population_effect": {
+            "mean": 0.141,
+            "ci_low": -0.039,
+            "ci_high": 0.321,
+            "probability_above_threshold": 0.67,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.28,
+            "notes": [
+              "Population effect is shrunk relative to personal effect."
+            ]
+          },
+          "personal_effect": {
+            "mean": 0.172,
+            "ci_low": 0.022,
+            "ci_high": 0.322,
+            "probability_above_threshold": 0.808,
+            "method": "bayesian_reference",
+            "identification_uncertainty": 0.28,
+            "notes": [
+              "Low-burden protein clarification mainly improves downstream recommendation quality."
+            ]
+          },
+          "rationale": [
+            "Low-burden protein clarification mainly improves downstream recommendation quality.",
+            "Study: protein_portion_prompt",
+            "Design: micro-randomized_question_prompt"
+          ]
+        }
+      },
+      "voi_scores": {
+        "protein_portion_check": {
+          "acquisition_function": "BALD",
+          "expected_information_gain": 0.628,
+          "expected_utility_improvement": 0.172,
+          "decision_change_prob": 0.808,
+          "combined_score": 0.355,
+          "notes": [
+            "Within user burden budget.",
+            "Posterior from study_18bcc8909439."
+          ]
+        },
+        "bedtime_protection": {
+          "acquisition_function": "expected_improvement",
+          "expected_information_gain": 0.226,
+          "expected_utility_improvement": 0.176,
+          "decision_change_prob": 0.821,
+          "combined_score": 0.161,
+          "notes": [
+            "Within user burden budget.",
+            "Posterior from study_27e10a3c96d4."
+          ]
+        },
+        "recovery_row": {
+          "acquisition_function": "thompson_sampling",
+          "expected_information_gain": 0.254,
+          "expected_utility_improvement": 0.201,
+          "decision_change_prob": 0.905,
+          "combined_score": 0.13,
+          "notes": [
+            "Within user burden budget.",
+            "Posterior from study_eed62bc96724."
+          ]
+        },
+        "strength_progression": {
+          "acquisition_function": "thompson_sampling",
+          "expected_information_gain": 0.254,
+          "expected_utility_improvement": 0.368,
+          "decision_change_prob": 1.0,
+          "combined_score": 0.03,
+          "notes": [
+            "Within user burden budget.",
+            "Posterior from study_eed62bc96724."
+          ]
+        }
+      },
+      "safety_decisions": {
+        "strength_progression": [
+          {
+            "stage": "stage_0_rules",
+            "status": "pass",
+            "reasons": [
+              "Passed rule-based safety checks."
+            ],
+            "score": null
+          },
+          {
+            "stage": "stage_1_screen",
+            "status": "pass",
+            "reasons": [
+              "Passed cheap screening model."
+            ],
+            "score": 0.431
+          },
+          {
+            "stage": "stage_2_precision",
+            "status": "pass",
+            "reasons": [
+              "Passed precision check."
+            ],
+            "score": null
+          }
+        ],
+        "recovery_row": [
+          {
+            "stage": "stage_0_rules",
+            "status": "pass",
+            "reasons": [
+              "Passed rule-based safety checks."
+            ],
+            "score": null
+          },
+          {
+            "stage": "stage_1_screen",
+            "status": "pass",
+            "reasons": [
+              "Passed cheap screening model."
+            ],
+            "score": 0.231
+          },
+          {
+            "stage": "stage_2_precision",
+            "status": "pass",
+            "reasons": [
+              "Passed precision check."
+            ],
+            "score": null
+          }
+        ],
+        "bedtime_protection": [
+          {
+            "stage": "stage_0_rules",
+            "status": "pass",
+            "reasons": [
+              "Passed rule-based safety checks."
+            ],
+            "score": null
+          },
+          {
+            "stage": "stage_1_screen",
+            "status": "pass",
+            "reasons": [
+              "Passed cheap screening model."
+            ],
+            "score": 0.171
+          },
+          {
+            "stage": "stage_2_precision",
+            "status": "pass",
+            "reasons": [
+              "Passed precision check."
+            ],
+            "score": null
+          }
+        ],
+        "protein_portion_check": [
+          {
+            "stage": "stage_0_rules",
+            "status": "pass",
+            "reasons": [
+              "Passed rule-based safety checks."
+            ],
+            "score": null
+          },
+          {
+            "stage": "stage_1_screen",
+            "status": "pass",
+            "reasons": [
+              "Passed cheap screening model."
+            ],
+            "score": 0.151
+          },
+          {
+            "stage": "stage_2_precision",
+            "status": "pass",
+            "reasons": [
+              "Passed precision check."
+            ],
+            "score": null
+          }
+        ]
+      },
+      "selected_action_id": "protein_portion_check",
+      "evidence_refs": [
+        "GUIDE_PROTEIN_001",
+        "GUIDE_VOI_001"
+      ],
+      "generated_explanation": "Ask before acting. Readiness is 0.77 with CI [0.58, 0.95], fatigue is 0.24, and sleep debt is 0.07. Chosen path: Clarify protein portion.",
+      "verifier_outcome": {
+        "status": "pass",
+        "reasons": [
+          "Evidence refs resolved in the vetted evidence base."
+        ]
+      },
+      "created_at": "2026-05-24T21:28:16Z"
+    }
+  },
+  "zone_records": {
+    "ingestion": [
+      "zone1_ingestion_021403d91147",
+      "zone1_ingestion_639e296f6316",
+      "zone1_ingestion_17999362dfbf",
+      "zone1_ingestion_1c3e28133bd1"
+    ],
+    "canonical": "zone2_canonical_6f1064706332",
+    "feature": "zone3_feature_experiment_04685671224a",
+    "insight": "zone4_insight_83de3bcc07aa"
+  },
+  "audit_log_count": 7,
+  "memory_context": {
+    "working_memory": {
+      "goal": "optimize training, sleep, and nutrition with low maintenance",
+      "plan": {
+        "phase": "building_bloom_architecture_scaffold"
+      },
+      "updated_at": "2026-05-24T21:28:16Z"
+    },
+    "long_term_facts": [
+      {
+        "fact_type": "diet_pattern",
+        "value": "vegan-vegetarian",
+        "recorded_at": "2026-05-24T21:28:16Z"
+      },
+      {
+        "fact_type": "meditation_rhythm",
+        "value": "morning_and_night",
+        "recorded_at": "2026-05-24T21:28:16Z"
+      }
+    ],
+    "insight_cache": {
+      "insight": {
+        "date": "2026-04-19",
+        "day_type": "training-biased",
+        "headline": "Ask before acting.",
+        "summary": "Ask before acting. Readiness is 0.77 with CI [0.58, 0.95], fatigue is 0.24, and sleep debt is 0.07. Chosen path: Clarify protein portion.",
+        "workout": "Keep training moderate unless new information raises or lowers confidence.",
+        "nutrition": "Current logged protein is about 66g. Bias the next meal toward dense vegan-vegetarian protein.",
+        "sleep": "Protect bedtime tonight. The system treats sleep regularity as a first-class lever, not an afterthought.",
+        "focus": "Use your strongest-focus window for demanding work and keep interruptions sparse unless the expected value is high.",
+        "question": "Was your highest-protein meal today smaller, typical, or larger than usual?",
+        "uncertainty": [
+          "Nutrition estimates are still rough enough that one clarification could change the recommendation.",
+          "Fatigue uncertainty is still wide because modality coverage is incomplete."
+        ],
+        "provenance": [
+          "Readiness mean 0.77",
+          "Fatigue mean 0.24",
+          "OOD score 0.12",
+          "Estimated protein 66g"
+        ],
+        "safety_notes": [
+          "No diagnosis, medication changes, or unverified supplements.",
+          "Escalate to a clinician for high-risk symptoms or anything outside routine wellness coaching."
+        ],
+        "trace": {
+          "trace_id": "trace_97630a76fc19",
+          "user_id_hash": "krunal_demo_user",
+          "purpose_of_use": "consumer_coaching",
+          "zone_lineage": {
+            "zone1": "zone1_ingestion_021403d91147",
+            "zone2": "zone2_canonical_6f1064706332",
+            "zone3": "zone3_feature_experiment_04685671224a"
+          },
+          "state_encoder_version": "reference_v0_bloom_scaffold",
+          "candidate_posteriors": {
+            "strength_progression": {
+              "study_id": "study_eed62bc96724",
+              "population_effect": {
+                "mean": 0.302,
+                "ci_low": 0.122,
+                "ci_high": 0.481,
+                "probability_above_threshold": 1.0,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.18,
+                "notes": [
+                  "Population effect is shrunk relative to personal effect."
+                ]
+              },
+              "personal_effect": {
+                "mean": 0.368,
+                "ci_low": 0.218,
+                "ci_high": 0.518,
+                "probability_above_threshold": 1.0,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.18,
+                "notes": [
+                  "Strength progression benefits when readiness dominates fatigue."
+                ]
+              },
+              "rationale": [
+                "Strength progression benefits when readiness dominates fatigue.",
+                "Study: training_load_adjustment",
+                "Design: randomized_feature_flag_with_long_term_holdout"
+              ]
+            },
+            "recovery_row": {
+              "study_id": "study_eed62bc96724",
+              "population_effect": {
+                "mean": 0.165,
+                "ci_low": -0.015,
+                "ci_high": 0.345,
+                "probability_above_threshold": 0.737,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.18,
+                "notes": [
+                  "Population effect is shrunk relative to personal effect."
+                ]
+              },
+              "personal_effect": {
+                "mean": 0.201,
+                "ci_low": 0.052,
+                "ci_high": 0.351,
+                "probability_above_threshold": 0.905,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.18,
+                "notes": [
+                  "Recovery-biased movement helps more when fatigue and sleep debt are elevated."
+                ]
+              },
+              "rationale": [
+                "Recovery-biased movement helps more when fatigue and sleep debt are elevated.",
+                "Study: training_load_adjustment",
+                "Design: randomized_feature_flag_with_long_term_holdout"
+              ]
+            },
+            "bedtime_protection": {
+              "study_id": "study_27e10a3c96d4",
+              "population_effect": {
+                "mean": 0.144,
+                "ci_low": -0.035,
+                "ci_high": 0.324,
+                "probability_above_threshold": 0.679,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.28,
+                "notes": [
+                  "Population effect is shrunk relative to personal effect."
+                ]
+              },
+              "personal_effect": {
+                "mean": 0.176,
+                "ci_low": 0.026,
+                "ci_high": 0.326,
+                "probability_above_threshold": 0.821,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.28,
+                "notes": [
+                  "Sleep-protection nudges matter most when sleep debt and stress are non-trivial."
+                ]
+              },
+              "rationale": [
+                "Sleep-protection nudges matter most when sleep debt and stress are non-trivial.",
+                "Study: bedtime_protection_nudge",
+                "Design: interrupted_time_series_with_per_user_baselines"
+              ]
+            },
+            "protein_portion_check": {
+              "study_id": "study_18bcc8909439",
+              "population_effect": {
+                "mean": 0.141,
+                "ci_low": -0.039,
+                "ci_high": 0.321,
+                "probability_above_threshold": 0.67,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.28,
+                "notes": [
+                  "Population effect is shrunk relative to personal effect."
+                ]
+              },
+              "personal_effect": {
+                "mean": 0.172,
+                "ci_low": 0.022,
+                "ci_high": 0.322,
+                "probability_above_threshold": 0.808,
+                "method": "bayesian_reference",
+                "identification_uncertainty": 0.28,
+                "notes": [
+                  "Low-burden protein clarification mainly improves downstream recommendation quality."
+                ]
+              },
+              "rationale": [
+                "Low-burden protein clarification mainly improves downstream recommendation quality.",
+                "Study: protein_portion_prompt",
+                "Design: micro-randomized_question_prompt"
+              ]
+            }
+          },
+          "voi_scores": {
+            "protein_portion_check": {
+              "acquisition_function": "BALD",
+              "expected_information_gain": 0.628,
+              "expected_utility_improvement": 0.172,
+              "decision_change_prob": 0.808,
+              "combined_score": 0.355,
+              "notes": [
+                "Within user burden budget.",
+                "Posterior from study_18bcc8909439."
+              ]
+            },
+            "bedtime_protection": {
+              "acquisition_function": "expected_improvement",
+              "expected_information_gain": 0.226,
+              "expected_utility_improvement": 0.176,
+              "decision_change_prob": 0.821,
+              "combined_score": 0.161,
+              "notes": [
+                "Within user burden budget.",
+                "Posterior from study_27e10a3c96d4."
+              ]
+            },
+            "recovery_row": {
+              "acquisition_function": "thompson_sampling",
+              "expected_information_gain": 0.254,
+              "expected_utility_improvement": 0.201,
+              "decision_change_prob": 0.905,
+              "combined_score": 0.13,
+              "notes": [
+                "Within user burden budget.",
+                "Posterior from study_eed62bc96724."
+              ]
+            },
+            "strength_progression": {
+              "acquisition_function": "thompson_sampling",
+              "expected_information_gain": 0.254,
+              "expected_utility_improvement": 0.368,
+              "decision_change_prob": 1.0,
+              "combined_score": 0.03,
+              "notes": [
+                "Within user burden budget.",
+                "Posterior from study_eed62bc96724."
+              ]
+            }
+          },
+          "safety_decisions": {
+            "strength_progression": [
+              {
+                "stage": "stage_0_rules",
+                "status": "pass",
+                "reasons": [
+                  "Passed rule-based safety checks."
+                ],
+                "score": null
+              },
+              {
+                "stage": "stage_1_screen",
+                "status": "pass",
+                "reasons": [
+                  "Passed cheap screening model."
+                ],
+                "score": 0.431
+              },
+              {
+                "stage": "stage_2_precision",
+                "status": "pass",
+                "reasons": [
+                  "Passed precision check."
+                ],
+                "score": null
+              }
+            ],
+            "recovery_row": [
+              {
+                "stage": "stage_0_rules",
+                "status": "pass",
+                "reasons": [
+                  "Passed rule-based safety checks."
+                ],
+                "score": null
+              },
+              {
+                "stage": "stage_1_screen",
+                "status": "pass",
+                "reasons": [
+                  "Passed cheap screening model."
+                ],
+                "score": 0.231
+              },
+              {
+                "stage": "stage_2_precision",
+                "status": "pass",
+                "reasons": [
+                  "Passed precision check."
+                ],
+                "score": null
+              }
+            ],
+            "bedtime_protection": [
+              {
+                "stage": "stage_0_rules",
+                "status": "pass",
+                "reasons": [
+                  "Passed rule-based safety checks."
+                ],
+                "score": null
+              },
+              {
+                "stage": "stage_1_screen",
+                "status": "pass",
+                "reasons": [
+                  "Passed cheap screening model."
+                ],
+                "score": 0.171
+              },
+              {
+                "stage": "stage_2_precision",
+                "status": "pass",
+                "reasons": [
+                  "Passed precision check."
+                ],
+                "score": null
+              }
+            ],
+            "protein_portion_check": [
+              {
+                "stage": "stage_0_rules",
+                "status": "pass",
+                "reasons": [
+                  "Passed rule-based safety checks."
+                ],
+                "score": null
+              },
+              {
+                "stage": "stage_1_screen",
+                "status": "pass",
+                "reasons": [
+                  "Passed cheap screening model."
+                ],
+                "score": 0.151
+              },
+              {
+                "stage": "stage_2_precision",
+                "status": "pass",
+                "reasons": [
+                  "Passed precision check."
+                ],
+                "score": null
+              }
+            ]
+          },
+          "selected_action_id": "protein_portion_check",
+          "evidence_refs": [
+            "GUIDE_PROTEIN_001",
+            "GUIDE_VOI_001"
+          ],
+          "generated_explanation": "Ask before acting. Readiness is 0.77 with CI [0.58, 0.95], fatigue is 0.24, and sleep debt is 0.07. Chosen path: Clarify protein portion.",
+          "verifier_outcome": {
+            "status": "pass",
+            "reasons": [
+              "Evidence refs resolved in the vetted evidence base."
+            ]
+          },
+          "created_at": "2026-05-24T21:28:16Z"
+        }
+      },
+      "updated_at": "2026-05-24T21:28:16Z"
+    }
+  },
+  "metrics_registered": [
+    "effective_engagement.plan_adherence",
+    "engagement.daily_active",
+    "meta.alignment_beta",
+    "meta.calibration.readiness_ece",
+    "objective.readiness_next_day"
+  ],
+  "alignment_snapshot": {
+    "metric_id": "meta.alignment_beta",
+    "cohort": "all_users",
+    "window": "rolling_7d",
+    "value": 0.084,
+    "computed_at": "2026-05-24T21:28:16Z",
+    "metadata": {
+      "engagement_value": 0.62,
+      "outcome_value": 0.58,
+      "alarm": false
+    }
+  }
+}

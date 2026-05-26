@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/state-encoder-request.schema.json",
+  "title": "Bloom State Encoder Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["user_id_hash", "window", "modalities", "context", "data_quality_flags"],
+  "properties": {
+    "user_id_hash": { "type": "string" },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_ts", "end_ts"],
+      "properties": {
+        "start_ts": { "type": "string" },
+        "end_ts": { "type": "string" }
+      }
+    },
+    "modalities": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "wearable_hr_series": { "type": "object" },
+        "wearable_hrv_series": { "type": "object" },
+        "sleep_episodes": { "type": "array" },
+        "workout_sessions": { "type": "array" },
+        "self_report_events": { "type": "array" },
+        "journal_text": { "type": ["string", "null"] },
+        "meal_photos": { "type": "array" },
+        "voice_notes": { "type": "array" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "calendar_load": { "type": "object" },
+        "location_history": { "type": "object" },
+        "weather": { "type": "object" },
+        "social_graph_summary": { "type": "object" }
+      }
+    },
+    "data_quality_flags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["per_modality_coverage", "detected_anomalies", "firmware_versions"],
+      "properties": {
+        "per_modality_coverage": {
+          "type": "object",
+          "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "detected_anomalies": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "firmware_versions": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "encoder_version_pin": { "type": ["string", "null"] }
+  }
+}
+

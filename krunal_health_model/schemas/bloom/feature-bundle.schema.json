@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health.local/schemas/bloom/feature-bundle.schema.json",
+  "title": "LongitudinalFeatureBundle",
+  "type": "object",
+  "required": [
+    "user_id_hash",
+    "as_of_date",
+    "lookback_days",
+    "current",
+    "baselines",
+    "deltas_from_baseline",
+    "trends",
+    "data_quality",
+    "created_at"
+  ],
+  "properties": {
+    "user_id_hash": {
+      "type": "string"
+    },
+    "as_of_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "lookback_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "current": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "boolean", "null"]
+      }
+    },
+    "baselines": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "mean": {
+            "type": ["number", "null"]
+          },
+          "std": {
+            "type": ["number", "null"]
+          },
+          "n": {
+            "type": "number"
+          }
+        },
+        "required": ["mean", "std", "n"]
+      }
+    },
+    "deltas_from_baseline": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "null"]
+      }
+    },
+    "trends": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["number", "null"]
+      }
+    },
+    "data_quality": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

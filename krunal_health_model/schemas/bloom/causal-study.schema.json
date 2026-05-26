@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/causal-study.schema.json",
+  "title": "Bloom Causal Study",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["study_id", "name", "experiments", "dag", "identification_strategy", "estimators", "results", "decision", "rationale", "reviewed_by", "primary_tags", "registered_at"],
+  "properties": {
+    "study_id": { "type": "string" },
+    "name": { "type": "string" },
+    "experiments": { "type": "array", "items": { "type": "string" } },
+    "dag": { "type": "object", "additionalProperties": true },
+    "identification_strategy": { "type": "string" },
+    "estimators": { "type": "array", "items": { "type": "object" } },
+    "results": { "type": "object", "additionalProperties": true },
+    "decision": { "type": "string" },
+    "rationale": { "type": "string" },
+    "reviewed_by": { "type": "array", "items": { "type": "string" } },
+    "primary_tags": { "type": "array", "items": { "type": "string" } },
+    "registered_at": { "type": "string" }
+  }
+}
+
