@@ -52,6 +52,18 @@ Run the local HTTP API:
 PYTHONPATH=krunal_health_model/src python -m krunal_health_platform.local_api --port 8765
 ```
 
+Open the local app UI after the API starts:
+
+```text
+http://127.0.0.1:8765
+```
+
+Run the advanced local ML demo:
+
+```bash
+PYTHONPATH=krunal_health_model/src python -m krunal_health_platform.advanced_learning_demo --input-dir krunal_health_model/data/sample
+```
+
 ## Files
 
 - `docs/krunal-health-data-contract.md`: what the system knows, where it comes from, and what is off-limits.
@@ -66,6 +78,7 @@ PYTHONPATH=krunal_health_model/src python -m krunal_health_platform.local_api --
 - `data/sample/*.json`: sample inputs for the local prototype.
 - `src/krunal_health_engine/daily_health_engine.py`: first local recommendation engine.
 - `src/krunal_health_platform/`: layered platform scaffold based on the Building Bloom document, including storage, feature materialization, Bayesian personalization, causal summaries, safety, VoI planning, and app orchestration.
+- `web/`: local app dashboard served by `krunal_health_platform.local_api`.
 
 ## Local API
 
@@ -75,6 +88,10 @@ The local API intentionally uses only the Python standard library. It gives the 
 - `GET /learning-summary?user_id_hash=krunal_demo_user`
 - `POST /daily-cycle` with either a `daily_state` object or an `input_dir`
 - `POST /feedback` with `date`, `action_id`, optional `adhered`, `reward`, and `outcomes`
+- `POST /voice/food/parse` with `raw_text`
+- `POST /labs/parse` with `text`
+- `POST /escalation/evaluate` with `free_text` or `daily_state`
+- `POST /network/experiment-plan` with `experiment_id`, `user_ids`, optional `edges`, and optional `treatment_arms`
 
 ## Build Order
 

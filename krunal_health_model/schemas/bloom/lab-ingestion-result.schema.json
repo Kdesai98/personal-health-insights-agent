@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health.local/schemas/bloom/lab-ingestion-result.schema.json",
+  "title": "LabIngestionResult",
+  "type": "object",
+  "required": ["observations", "clinician_discussion_flags", "unsupported_lines", "boundary_notice", "parsed_at"],
+  "properties": {
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["marker", "value", "unit", "category", "reference_status", "source_text"],
+        "properties": {
+          "marker": { "type": "string" },
+          "value": { "type": "number" },
+          "unit": { "type": ["string", "null"] },
+          "category": { "type": "string" },
+          "reference_status": {
+            "type": "string",
+            "enum": ["below_reference", "within_reference", "above_reference"]
+          },
+          "source_text": { "type": "string" }
+        }
+      }
+    },
+    "clinician_discussion_flags": { "type": "array", "items": { "type": "string" } },
+    "unsupported_lines": { "type": "array", "items": { "type": "string" } },
+    "boundary_notice": { "type": "string" },
+    "parsed_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

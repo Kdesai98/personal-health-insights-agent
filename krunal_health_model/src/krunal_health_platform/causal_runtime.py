@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from math import sqrt
 from typing import Any
 
-from .bayesian import _reward_from_feedback
+from .ml_utils import outcome_reward
 from .models import PosteriorDistribution, jsonable
 
 
@@ -126,7 +126,7 @@ class NOf1CausalRuntime:
 
     def _outcome_value(self, event: dict[str, Any], outcome: str) -> float | None:
         if outcome == "utility_reward":
-            return _reward_from_feedback(event)
+            return outcome_reward(event)
         outcomes = event.get("outcomes") or {}
         if outcomes.get(outcome) is None:
             return None

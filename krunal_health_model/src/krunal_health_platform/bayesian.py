@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from math import sqrt
 from typing import Any
 
+from .ml_utils import outcome_reward
 from .models import jsonable
 
 
@@ -14,25 +15,7 @@ def _clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
 
 
 def _reward_from_feedback(event: dict[str, Any]) -> float | None:
-    if event.get("reward") is not None:
-        try:
-            return float(event["reward"])
-        except (TypeError, ValueError):
-            return None
-
-    outcomes = event.get("outcomes") or {}
-    terms = []
-    for key in ("energy_next_day_1_to_10", "mood_next_day_1_to_10", "digestion_next_day_1_to_10"):
-        if outcomes.get(key) is not None:
-            terms.append(_clamp(float(outcomes[key]) / 10.0))
-    if outcomes.get("readiness_next_day") is not None:
-        readiness = float(outcomes["readiness_next_day"])
-        terms.append(_clamp(readiness / 100.0 if readiness > 1.0 else readiness))
-    if event.get("adhered") is True:
-        terms.append(0.65)
-    elif event.get("adhered") is False:
-        terms.append(0.25)
-    return round(sum(terms) / len(terms), 3) if terms else None
+    return outcome_reward(event)
 
 
 @dataclass

@@ -19,6 +19,7 @@ from .models import (
     VoIDecision,
 )
 from .service import DailyCycleResult, HealthIntelligenceService
+from .state_training import StateModelArtifact, StateModelTrainer, TrainableStateEncoder
 
 __all__ = [
     "AppPlan",
@@ -39,4 +40,7 @@ __all__ = [
     "VoIDecision",
     "DailyCycleResult",
     "HealthIntelligenceService",
+    "StateModelArtifact",
+    "StateModelTrainer",
+    "TrainableStateEncoder",
 ]

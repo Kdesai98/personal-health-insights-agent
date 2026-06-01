@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import mimetypes
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -16,14 +17,22 @@ from urllib.parse import parse_qs, urlparse
 
 from krunal_health_engine.daily_health_engine import build_daily_state
 
+from .privacy import BearerTokenAuth
 from .service import HealthIntelligenceService
 
 
 class HealthAPIHandler(BaseHTTPRequestHandler):
     service: HealthIntelligenceService
+    auth: BearerTokenAuth
+    web_root = Path(__file__).resolve().parents[2] / "web"
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
+        if parsed.path in {"/", "/app.js", "/styles.css"}:
+            self._serve_static(parsed.path)
+            return
+        if not self._authorized():
+            return
         if parsed.path == "/health":
             self._send_json({"status": "ok"})
             return
@@ -34,7 +43,21 @@ class HealthAPIHandler(BaseHTTPRequestHandler):
             return
         self._send_json({"error": "not_found"}, HTTPStatus.NOT_FOUND)
 
+    def _serve_static(self, path: str) -> None:
+        file_path = self.web_root / ("index.html" if path == "/" else path.lstrip("/"))
+        if not file_path.exists():
+            self._send_json({"error": "not_found"}, HTTPStatus.NOT_FOUND)
+            return
+        content = file_path.read_bytes()
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", mimetypes.guess_type(file_path.name)[0] or "application/octet-stream")
+        self.send_header("Content-Length", str(len(content)))
+        self.end_headers()
+        self.wfile.write(content)
+
     def do_POST(self) -> None:
+        if not self._authorized():
+            return
         parsed = urlparse(self.path)
         try:
             payload = self._read_json()
@@ -68,6 +91,30 @@ class HealthAPIHandler(BaseHTTPRequestHandler):
                 )
                 self._send_json({"event_id": event_id})
                 return
+            if parsed.path == "/voice/food/parse":
+                self._send_json(self.service.parse_food_voice_log(str(payload["raw_text"])))
+                return
+            if parsed.path == "/labs/parse":
+                self._send_json(self.service.parse_lab_text(str(payload["text"])))
+                return
+            if parsed.path == "/escalation/evaluate":
+                self._send_json(
+                    self.service.evaluate_escalation(
+                        daily_state=payload.get("daily_state"),
+                        free_text=payload.get("free_text"),
+                    )
+                )
+                return
+            if parsed.path == "/network/experiment-plan":
+                self._send_json(
+                    self.service.design_network_experiment(
+                        experiment_id=str(payload["experiment_id"]),
+                        user_ids=list(payload["user_ids"]),
+                        edges=payload.get("edges") or [],
+                        treatment_arms=payload.get("treatment_arms") or ["control", "treatment"],
+                    )
+                )
+                return
         except KeyError as error:
             self._send_json({"error": f"missing required field: {error.args[0]}"}, HTTPStatus.BAD_REQUEST)
             return
@@ -79,6 +126,14 @@ class HealthAPIHandler(BaseHTTPRequestHandler):
 
     def log_message(self, format: str, *args: object) -> None:
         return
+
+    def _authorized(self) -> bool:
+        try:
+            self.auth.assert_authorized(self.headers.get("Authorization"))
+            return True
+        except PermissionError:
+            self._send_json({"error": "unauthorized"}, HTTPStatus.UNAUTHORIZED)
+            return False
 
     def _read_json(self) -> dict[str, object]:
         length = int(self.headers.get("Content-Length", "0"))
@@ -109,6 +164,7 @@ def main() -> None:
 
     service = HealthIntelligenceService(args.db_path)
     HealthAPIHandler.service = service
+    HealthAPIHandler.auth = BearerTokenAuth()
     server = ThreadingHTTPServer((args.host, args.port), HealthAPIHandler)
     try:
         print(f"health API listening on http://{args.host}:{args.port}")

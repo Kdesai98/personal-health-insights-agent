@@ -122,6 +122,20 @@ class SQLiteHealthStore:
             )
             self.connection.commit()
 
+    def list_feature_bundles(self, user_id_hash: str, limit: int | None = None) -> list[dict[str, Any]]:
+        with self._lock:
+            rows = self.connection.execute(
+                """
+                SELECT payload_json FROM feature_bundles
+                WHERE user_id_hash = ?
+                ORDER BY as_of_date ASC, created_at ASC
+                """,
+                (user_id_hash,),
+            ).fetchall()
+        if limit is not None:
+            rows = rows[-limit:]
+        return [json.loads(row["payload_json"]) for row in rows]
+
     def save_intervention_trace(
         self,
         user_id_hash: str,
@@ -153,7 +167,7 @@ class SQLiteHealthStore:
         with self._lock:
             rows = self.connection.execute(
                 """
-                SELECT payload_json FROM intervention_traces
+                SELECT date, payload_json FROM intervention_traces
                 WHERE user_id_hash = ?
                 ORDER BY date ASC, created_at ASC
                 """,
@@ -161,7 +175,12 @@ class SQLiteHealthStore:
             ).fetchall()
         if limit is not None:
             rows = rows[-limit:]
-        return [json.loads(row["payload_json"]) for row in rows]
+        traces = []
+        for row in rows:
+            payload = json.loads(row["payload_json"])
+            payload.setdefault("date", row["date"])
+            traces.append(payload)
+        return traces
 
     def append_feedback_event(self, user_id_hash: str, feedback: dict[str, Any]) -> str:
         event_id = str(feedback.get("event_id") or generate_id("feedback"))

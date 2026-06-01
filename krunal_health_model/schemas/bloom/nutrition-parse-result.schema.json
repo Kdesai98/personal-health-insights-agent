@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health.local/schemas/bloom/nutrition-parse-result.schema.json",
+  "title": "NutritionParseResult",
+  "type": "object",
+  "required": ["raw_text", "parsed_foods", "estimated_nutrition", "confidence", "clarifying_questions", "parsed_at"],
+  "properties": {
+    "raw_text": { "type": "string" },
+    "parsed_foods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "quantity", "matched_keyword", "confidence", "estimated_nutrition"],
+        "properties": {
+          "name": { "type": "string" },
+          "quantity": { "type": "number" },
+          "matched_keyword": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "estimated_nutrition": { "type": "object" }
+        }
+      }
+    },
+    "estimated_nutrition": { "type": "object" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "clarifying_questions": { "type": "array", "items": { "type": "string" } },
+    "parsed_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

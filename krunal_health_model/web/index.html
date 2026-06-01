@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Krunal Health Intelligence</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Krunal Health Intelligence</h1>
+          <p id="api-status">Checking backend...</p>
+        </div>
+        <div class="top-actions">
+          <input id="api-token" type="password" placeholder="API token" autocomplete="off" />
+          <button id="save-token">Save Token</button>
+          <button id="run-cycle">Run Daily Cycle</button>
+        </div>
+      </header>
+
+      <section class="grid">
+        <article class="panel plan-panel">
+          <div class="panel-header">
+            <h2>Daily Plan</h2>
+            <span id="day-type">No run yet</span>
+          </div>
+          <p id="summary">Run the daily cycle against sample data.</p>
+          <div class="stack">
+            <div>
+              <strong>Workout</strong>
+              <p id="workout">-</p>
+            </div>
+            <div>
+              <strong>Nutrition</strong>
+              <p id="nutrition">-</p>
+            </div>
+            <div>
+              <strong>Question</strong>
+              <p id="question">-</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Learning</h2>
+            <span id="feedback-count">0 feedback events</span>
+          </div>
+          <pre id="learning-json">{}</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Voice Food</h2>
+          </div>
+          <textarea id="food-text">I had tofu, lentils, rice, avocado, and blueberries.</textarea>
+          <button id="parse-food">Parse Food</button>
+          <pre id="food-json">{}</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Feedback</h2>
+          </div>
+          <label>
+            Action
+            <select id="feedback-action">
+              <option value="protein_portion_check">protein_portion_check</option>
+              <option value="strength_progression">strength_progression</option>
+              <option value="recovery_row">recovery_row</option>
+              <option value="bedtime_protection">bedtime_protection</option>
+            </select>
+          </label>
+          <label>
+            Reward
+            <input id="feedback-reward" type="number" min="0" max="1" step="0.01" value="0.74" />
+          </label>
+          <button id="record-feedback">Record Feedback</button>
+          <pre id="feedback-json">{}</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Labs</h2>
+          </div>
+          <textarea id="lab-text">ApoB 88 mg/dL&#10;HbA1c 5.4 %&#10;Vitamin D 28 ng/mL</textarea>
+          <button id="parse-labs">Parse Labs</button>
+          <pre id="labs-json">{}</pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Escalation</h2>
+          </div>
+          <textarea id="escalation-text">Felt normal today, just a little sore after rowing.</textarea>
+          <button id="evaluate-escalation">Evaluate</button>
+          <pre id="escalation-json">{}</pre>
+        </article>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
