@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/state-encoder-response.schema.json",
+  "title": "Bloom State Encoder Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["short_term_embedding", "long_term_embedding", "state_scores", "modality_support", "ood_score", "abstain", "abstain_reasons", "encoder_version", "computed_at", "computation_cost_ms"],
+  "properties": {
+    "short_term_embedding": {
+      "type": "array",
+      "items": { "type": "number" }
+    },
+    "long_term_embedding": {
+      "type": "array",
+      "items": { "type": "number" }
+    },
+    "state_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "modality_support": {
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 }
+    },
+    "ood_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "abstain": { "type": "boolean" },
+    "abstain_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "encoder_version": { "type": "string" },
+    "computed_at": { "type": "string" },
+    "computation_cost_ms": { "type": "integer", "minimum": 0 }
+  }
+}
+

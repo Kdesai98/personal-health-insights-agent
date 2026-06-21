@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/experiment.schema.json",
+  "title": "Bloom Experiment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["experiment_id", "owner", "hypothesis", "design_type", "unit_type", "randomization", "eligibility_filter", "treatment_arms", "primary_outcome", "secondary_outcomes", "minimum_practical_effect", "power_calc", "decision_rules", "stop_rules", "analysis_plan", "registered_at", "long_term_holdout_flag"],
+  "properties": {
+    "experiment_id": { "type": "string" },
+    "owner": { "type": "string" },
+    "hypothesis": { "type": "string" },
+    "design_type": { "type": "string" },
+    "unit_type": { "type": "string" },
+    "randomization": { "type": "object", "additionalProperties": true },
+    "eligibility_filter": { "type": "string" },
+    "treatment_arms": { "type": "array", "items": { "type": "object" } },
+    "primary_outcome": { "type": "object" },
+    "secondary_outcomes": { "type": "array", "items": { "type": "object" } },
+    "minimum_practical_effect": { "type": "number" },
+    "power_calc": { "type": "object", "additionalProperties": true },
+    "decision_rules": { "type": "object", "additionalProperties": { "type": "string" } },
+    "stop_rules": { "type": "object", "additionalProperties": true },
+    "analysis_plan": { "type": "object", "additionalProperties": true },
+    "registered_at": { "type": "string" },
+    "long_term_holdout_flag": { "type": "boolean" }
+  }
+}
+

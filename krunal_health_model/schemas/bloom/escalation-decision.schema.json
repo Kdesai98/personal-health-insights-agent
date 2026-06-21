@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health.local/schemas/bloom/escalation-decision.schema.json",
+  "title": "EscalationDecision",
+  "type": "object",
+  "required": ["level", "reasons", "user_message", "recommended_destination", "evaluated_at"],
+  "properties": {
+    "level": {
+      "type": "string",
+      "enum": ["routine_wellness", "clinician_discussion", "emergency"]
+    },
+    "reasons": { "type": "array", "items": { "type": "string" } },
+    "user_message": { "type": "string" },
+    "recommended_destination": { "type": "string" },
+    "evaluated_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

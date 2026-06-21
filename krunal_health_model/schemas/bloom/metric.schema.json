@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://krunal-health-model.local/schemas/bloom/metric.schema.json",
+  "title": "Bloom Metric Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metric_id", "definition", "tier", "ownership", "alarm_thresholds", "consumers"],
+  "properties": {
+    "metric_id": { "type": "string" },
+    "definition": { "type": "string" },
+    "tier": { "type": "string" },
+    "ownership": { "type": "string" },
+    "alarm_thresholds": { "type": "object", "additionalProperties": true },
+    "consumers": { "type": "array", "items": { "type": "string" } }
+  }
+}
+
